@@ -25,6 +25,14 @@
         <p>{{ project.realization }}</p>
       </div>
 
+      <!-- Difficultés et solutions -->
+      <div class="project-difficulties">
+        <h3>Difficultés et soltions :</h3>
+        <ul>
+          <li v-for="diff in project.difficulties" :key="diff">{{ diff }}</li>
+        </ul>
+      </div>
+
       <!-- Lien GitHub -->
       <div class="project-links">
         <a :href="project.githubLink" target="_blank" class="github-btn"
@@ -103,29 +111,37 @@ export default {
 
 .project-technologies,
 .project-context,
-.project-realization {
+.project-realization,
+.project-difficulties {
   margin-bottom: 1rem;
 }
 
 .project-technologies h3,
 .project-context h3,
-.project-realization h3 {
+.project-realization h3,
+.project-difficulties h3 {
   font-size: 1.4rem;
   margin-bottom: 0.5rem;
   color: #222;
 }
 
-.project-technologies ul {
+.project-technologies ul,
+.project-difficulties ul {
   list-style-type: disc;
   margin-left: 20px;
   color: #555;
 }
 
 .project-technologies ul li,
+.project-difficulties ul li,
 .project-context p,
 .project-realization p {
   font-size: 1.1rem;
   color: #666;
+}
+
+.project-difficulties ul li{
+  margin-top: 15px;
 }
 
 .project-links {
