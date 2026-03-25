@@ -1,67 +1,109 @@
 <template>
   <section class="contact">
     <h1 class="form-title">Contactez-moi</h1>
-    <form @submit.prevent="submitForm">
+
+    <form @submit.prevent="submitForm" class="contact-form">
       <label for="name">Nom</label>
-      <input type="text" id="name" v-model="name" required />
+      <input
+        type="text"
+        id="name"
+        v-model="name"
+        placeholder="Votre nom"
+        required
+      />
 
       <label for="email">Email</label>
-      <input type="email" id="email" v-model="email" required />
+      <input
+        type="email"
+        id="email"
+        v-model="email"
+        placeholder="Votre adresse email"
+        required
+      />
 
       <label for="message">Message</label>
-      <textarea id="message" v-model="message" required></textarea>
+      <textarea
+        id="message"
+        v-model="message"
+        placeholder="Votre message"
+        required
+      ></textarea>
 
-      <button type="submit">Envoyer</button>
+      <button type="submit" :disabled="loading">
+        {{ loading ? "Envoi en cours..." : "Envoyer" }}
+      </button>
+
+      <p v-if="successMessage" class="success-message">
+        {{ successMessage }}
+      </p>
+
+      <p v-if="errorMessage" class="error-message">
+        {{ errorMessage }}
+      </p>
     </form>
   </section>
 </template>
 
 <script setup>
 import { ref } from "vue";
-import emailjs from "emailjs-com";
+import emailjs from "@emailjs/browser";
 
-// Déclare les variables pour le formulaire
+const config = useRuntimeConfig();
+
 const name = ref("");
 const email = ref("");
 const message = ref("");
 
-// Fonction pour traiter l'envoi du formulaire
-const submitForm = () => {
+const loading = ref(false);
+const successMessage = ref("");
+const errorMessage = ref("");
+
+const submitForm = async () => {
+  successMessage.value = "";
+  errorMessage.value = "";
+  loading.value = true;
+
   const templateParams = {
     from_name: name.value,
     from_email: email.value,
     message: message.value,
   };
 
-  // Envoie le message avec EmailJS
-  emailjs
-    .send(
-      "service_3mtxcti",
-      "template_rnbh6os",
+  try {
+    const response = await emailjs.send(
+      config.public.emailjsServiceId,
+      config.public.emailjsTemplateId,
       templateParams,
-      "YXyHUFlGir4_WgZYx"
-    )
-    .then(
-      (response) => {
-        console.log("Email envoyé avec succès", response);
-        alert("Votre message a été envoyé avec succès!");
-        // Réinitialiser le formulaire
-        name.value = "";
-        email.value = "";
-        message.value = "";
-      },
-      (error) => {
-        console.error("Erreur lors de l'envoi de l'email", error);
-        alert("Une erreur est survenue, veuillez réessayer.");
-      }
+      config.public.emailjsPublicKey
     );
+
+    console.log("Email envoyé avec succès :", response);
+
+    successMessage.value = "Votre message a bien été envoyé !";
+    name.value = "";
+    email.value = "";
+    message.value = "";
+  } catch (error) {
+    console.error("Erreur complète EmailJS :", error);
+
+    if (error?.text) {
+      errorMessage.value = `Erreur : ${error.text}`;
+    } else if (error?.message) {
+      errorMessage.value = `Erreur : ${error.message}`;
+    } else {
+      errorMessage.value =
+        "Une erreur est survenue lors de l'envoi. Vérifiez votre configuration EmailJS.";
+    }
+  } finally {
+    loading.value = false;
+  }
 };
 </script>
 
 <style scoped>
 .contact {
-  padding: 40px;
-  padding-top: 80px;
+  padding: 60px 20px;
+  padding-top: 100px;
   text-align: center;
 }
 
@@ -69,44 +111,82 @@ const submitForm = () => {
   font-size: 3rem;
   font-family: "Formula Condensed", sans-serif;
   color: #205b43;
+  margin-bottom: 30px;
 }
 
-form {
+.contact-form {
   display: flex;
   flex-direction: column;
   align-items: center;
-  margin-top: 20px;
+  gap: 10px;
+  max-width: 500px;
+  margin: 0 auto;
 }
 
-form label {
-  margin-top: 10px;
-  font-size: 1.2rem;
+.contact-form label {
+  width: 100%;
+  text-align: left;
+  font-size: 1rem;
+  font-weight: 600;
+  color: #205b43;
 }
 
-form input,
-form textarea {
-  padding: 10px;
-  margin-top: 5px;
-  width: 80%;
-  max-width: 400px;
-  border: 1px solid #ccc;
-  border-radius: 5px;
+.contact-form input,
+.contact-form textarea {
+  width: 100%;
+  padding: 12px 14px;
+  border: 1px solid #cfcfcf;
+  border-radius: 10px;
   font-size: 1rem;
   box-sizing: border-box;
+  outline: none;
+  transition: border-color 0.2s ease, box-shadow 0.2s ease;
 }
 
-form button {
-  margin-top: 20px;
-  padding: 10px 20px;
-  background-color: #28a745;
+.contact-form input:focus,
+.contact-form textarea:focus {
+  border-color: #205b43;
+  box-shadow: 0 0 0 3px rgba(32, 91, 67, 0.12);
+}
+
+.contact-form textarea {
+  min-height: 160px;
+  resize: vertical;
+}
+
+.contact-form button {
+  margin-top: 10px;
+  padding: 12px 22px;
+  background-color: #205b43;
   color: white;
   border: none;
-  border-radius: 5px;
+  border-radius: 10px;
   font-size: 1rem;
+  font-weight: 600;
   cursor: pointer;
+  transition: transform 0.2s ease, opacity 0.2s ease;
 }
 
-form button:hover {
-  background-color: #218838;
+.contact-form button:hover {
+  transform: translateY(-2px);
+  opacity: 0.95;
+}
+
+.contact-form button:disabled {
+  opacity: 0.7;
+  cursor: not-allowed;
+  transform: none;
+}
+
+.success-message {
+  color: #1f7a3d;
+  font-weight: 600;
+  margin-top: 10px;
+}
+
+.error-message {
+  color: #c0392b;
+  font-weight: 600;
+  margin-top: 10px;
 }
 </style>
