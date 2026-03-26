@@ -1,6 +1,6 @@
 <template>
   <footer>
-    <p>&copy; 2024 Mon Portfolio. Tous droits réservés.</p>
+    <p>&copy; 2026 Mon Portfolio. Tous droits réservés.</p>
   </footer>
 </template>
 
