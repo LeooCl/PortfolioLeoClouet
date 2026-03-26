@@ -1,75 +1,114 @@
-# Nuxt Minimal Starter
+# 🌐 Portfolio – Léo
 
-Look at the [Nuxt documentation](https://nuxt.com/docs/getting-started/introduction) to learn more.
+Bienvenue sur mon portfolio de développeur web ✨
+Ce projet a été conçu pour présenter mes compétences, mes projets et mon univers.
 
-## Setup
+---
 
-Make sure to install dependencies:
+## 🚀 Aperçu
+
+Ce portfolio est une application web moderne développée avec **Nuxt 3** et **Vue.js**.
+Il met en avant :
+
+* 👩‍💻 Mes projets
+* 📚 Mes compétences techniques
+* 📸 Mon univers visuel
+* 📬 Un formulaire de contact
+
+---
+
+## 🛠️ Technologies utilisées
+
+* ⚡ Nuxt 3
+* 🟢 Vue.js
+* 🎨 CSS (design responsive & moderne)
+* 🔗 Vue Router
+* 💡 JavaScript (Composition API)
+
+---
+
+## 🎨 Design
+
+Le design est pensé pour être :
+
+* ✨ Moderne et épuré
+* 📱 Responsive (mobile / tablette / desktop)
+* 🎯 Axé UX (navigation fluide)
+
+---
+
+## ▶️ Installation & lancement
+
+Clone le projet :
 
 ```bash
-# npm
+git clone https://github.com/LeooCl/PortfolioLeoClouet
+```
+
+Installe les dépendances :
+
+```bash
 npm install
-
-# pnpm
-pnpm install
-
-# yarn
-yarn install
-
-# bun
-bun install
 ```
 
-## Development Server
-
-Start the development server on `http://localhost:3000`:
+Lance le serveur de développement :
 
 ```bash
-# npm
 npm run dev
-
-# pnpm
-pnpm dev
-
-# yarn
-yarn dev
-
-# bun
-bun run dev
 ```
 
-## Production
+---
 
-Build the application for production:
+## 🌍 Déploiement
 
-```bash
-# npm
-npm run build
+Le site peut être déployé facilement sur :
 
-# pnpm
-pnpm build
+* Vercel
+* Netlify
 
-# yarn
-yarn build
+---
 
-# bun
-bun run build
-```
+## 📸 Aperçu du site
 
-Locally preview production build:
+*prochainement screenshot de mon portfolio*
 
-```bash
-# npm
-npm run preview
+---
 
-# pnpm
-pnpm preview
+## 📬 Me contacter
 
-# yarn
-yarn preview
+Tu peux me contacter via :
 
-# bun
-bun run preview
-```
+* [Le formulaire du site](https://clouetleo.netlify.app/contact)
+* [LinkedIn](https://www.linkedin.com/in/l%C3%A9o-clouet-7bbb82293/)
+* [GitHub](https://github.com/LeooCl)
 
-Check out the [deployment documentation](https://nuxt.com/docs/getting-started/deployment) for more information.
+---
+
+## 💡 Objectif
+
+Ce portfolio a pour but de :
+
+* Présenter mon travail
+* Montrer mes compétences en développement web
+* Servir de base évolutive pour mes futurs projets
+
+---
+
+## ✨ Améliorations futures
+
+* 🔐 Système d’authentification
+* 🧩 Ajout de nouveaux projets
+* ⚙️ Optimisation des performances
+* 🎬 Animations avancées
+
+---
+
+## 📝 Licence
+
+Ce projet est personnel.
+Merci de ne pas le réutiliser sans autorisation.
+
+---
+
+⭐ N’hésite pas à laisser une étoile si le projet te plaît !
+
