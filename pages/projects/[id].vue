@@ -39,13 +39,10 @@
         <h3>Réalisation :</h3>
         <p>{{ project.realization }}</p>
       </div>
-
+    </div>
+    <div class="project-links">
       <!-- Lien GitHub -->
-      <div class="project-links">
-        <a :href="project.githubLink" target="_blank" class="github-btn">
-          Voir le code source
-        </a>
-      </div>
+      <AppButton :to="project.githubLink" label="Voir sur GitHub" />
     </div>
   </div>
 
@@ -82,6 +79,7 @@ export default {
   display: flex;
   flex-direction: column;
   gap: 2rem;
+  align-items: flex-start;
 }
 
 .project-title {
@@ -162,8 +160,9 @@ export default {
 }
 
 .project-links {
-  text-align: center;
-  margin-top: 2rem;
+  width: 100%;
+  display: flex;
+  justify-content: center;
 }
 
 .github-btn {
