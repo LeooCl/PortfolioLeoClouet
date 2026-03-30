@@ -1,16 +1,31 @@
 <template>
   <div v-if="project" class="project-detail">
     <h1 class="project-title">{{ project.title }}</h1>
+
     <div class="project-image-container">
-      <img :src="project.image" alt="project.title" class="project-image" />
+      <img :src="project.image" :alt="project.title" class="project-image" />
     </div>
+
     <div class="project-info">
-      <!-- Technologies -->
-      <div class="project-technologies">
-        <h3>Technologies utilisées :</h3>
-        <ul>
-          <li v-for="tech in project.technologies" :key="tech">{{ tech }}</li>
-        </ul>
+      <!-- Technologies + Compétences -->
+      <div class="project-tech-skills">
+        <div class="project-technologies">
+          <h3>Technologies utilisées :</h3>
+          <ul>
+            <li v-for="tech in project.technologies" :key="tech">
+              {{ tech }}
+            </li>
+          </ul>
+        </div>
+
+        <div class="project-skills">
+          <h3>Compétences mises en avant :</h3>
+          <ul>
+            <li v-for="skill in project.skills" :key="skill">
+              {{ skill }}
+            </li>
+          </ul>
+        </div>
       </div>
 
       <!-- Contexte -->
@@ -27,9 +42,9 @@
 
       <!-- Lien GitHub -->
       <div class="project-links">
-        <a :href="project.githubLink" target="_blank" class="github-btn"
-          >Voir le code source</a
-        >
+        <a :href="project.githubLink" target="_blank" class="github-btn">
+          Voir le code source
+        </a>
       </div>
     </div>
   </div>
@@ -101,13 +116,22 @@ export default {
   gap: 1.5rem;
 }
 
+/* Bloc technologies + compétences */
+.project-tech-skills {
+  display: flex;
+  gap: 3rem;
+  justify-content: space-between;
+  align-items: flex-start;
+}
+
 .project-technologies,
-.project-context,
-.project-realization {
+.project-skills {
+  flex: 1;
   margin-bottom: 1rem;
 }
 
 .project-technologies h3,
+.project-skills h3,
 .project-context h3,
 .project-realization h3 {
   font-size: 1.4rem;
@@ -115,17 +139,26 @@ export default {
   color: #222;
 }
 
-.project-technologies ul {
+.project-technologies ul,
+.project-skills ul {
   list-style-type: disc;
   margin-left: 20px;
   color: #555;
+  padding-left: 0.5rem;
 }
 
 .project-technologies ul li,
+.project-skills ul li,
 .project-context p,
 .project-realization p {
   font-size: 1.1rem;
   color: #666;
+  margin-bottom: 0.4rem;
+}
+
+.project-context,
+.project-realization {
+  margin-bottom: 1rem;
 }
 
 .project-links {
@@ -152,5 +185,22 @@ export default {
   font-size: 1.5rem;
   color: #888;
   margin-top: 3rem;
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+  .project-title {
+    font-size: 3rem;
+  }
+
+  .project-tech-skills {
+    flex-direction: column;
+    gap: 1.5rem;
+  }
+
+  .project-detail {
+    padding: 1.2rem;
+    padding-top: 70px;
+  }
 }
 </style>

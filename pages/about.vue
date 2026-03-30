@@ -31,7 +31,7 @@
       <div class="contact">
         <h3>Contact</h3>
         <p>Si vous avez des questions, n'hésitez pas à me contacter !</p>
-        <NuxtLink to="/contact" class="button">Contactez-moi</NuxtLink>
+        <AppButton to="/contact" label="Contactez-moi" />
       </div>
 
       <div class="download-cv">

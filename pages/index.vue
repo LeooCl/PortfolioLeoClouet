@@ -339,9 +339,7 @@
         techniques complexes et je m'efforce de toujours apprendre de nouvelles
         technologies.
       </p>
-      <NuxtLink to="/about" class="btn btn-learn-more"
-        ><span>En savoir plus</span></NuxtLink
-      >
+      <AppButton to="/about" label="En savoir plus" />
     </div>
   </section>
   <section class="projects-highlight">
@@ -353,9 +351,7 @@
         :project="project"
       />
     </div>
-    <NuxtLink to="/projects" class="view-all-button btn btn-learn-more"
-      ><span>Tous les projets</span></NuxtLink
-    >
+    <AppButton to="/projects" label="Tous les projets" />
   </section>
 </template>
 
@@ -476,104 +472,6 @@ p {
   line-height: 1.8;
 }
 
-/* Style du bouton avec animation */
-.btn {
-  width: 130px;
-  height: 40px;
-  color: #fff;
-  border-radius: 5px;
-  padding: 10px 25px;
-  font-family: "Lato", sans-serif;
-  font-weight: 500;
-  background: transparent;
-  cursor: pointer;
-  transition: all 0.3s ease;
-  position: relative;
-  display: inline-block;
-  box-shadow: inset 2px 2px 2px 0px rgba(255, 255, 255, 0.5),
-    7px 7px 20px 0px rgba(0, 0, 0, 0.1), 4px 4px 5px 0px rgba(0, 0, 0, 0.1);
-  text-decoration: none;
-}
-
-.btn-learn-more {
-  background-color: #f0ecfc;
-  background-image: linear-gradient(330deg, #7da097 0%, #a5dfc8 85%);
-  line-height: 42px;
-  padding: 0;
-  border: none;
-}
-
-.btn-learn-more span {
-  position: relative;
-  display: block;
-  width: 100%;
-  height: 100%;
-}
-
-.btn-learn-more:before,
-.btn-learn-more:after {
-  position: absolute;
-  content: "";
-  right: 0;
-  bottom: 0;
-  background: #205b43;
-  transition: all 0.3s ease;
-}
-
-.btn-learn-more:before {
-  height: 0%;
-  width: 2px;
-}
-
-.btn-learn-more:after {
-  width: 0%;
-  height: 2px;
-}
-
-.btn-learn-more:hover:before {
-  height: 100%;
-}
-
-.btn-learn-more:hover:after {
-  width: 100%;
-}
-
-.btn-learn-more:hover {
-  background: transparent;
-}
-
-.btn-learn-more span:hover {
-  color: #205b43;
-}
-
-.btn-learn-more span:before,
-.btn-learn-more span:after {
-  position: absolute;
-  content: "";
-  left: 0;
-  top: 0;
-  background: #205b43;
-  transition: all 0.3s ease;
-}
-
-.btn-learn-more span:before {
-  width: 2px;
-  height: 0%;
-}
-
-.btn-learn-more span:after {
-  height: 2px;
-  width: 0%;
-}
-
-.btn-learn-more span:hover:before {
-  height: 100%;
-}
-
-.btn-learn-more span:hover:after {
-  width: 100%;
-}
-
 /* Partie projets  */
 .projects-highlight {
   padding: 4rem 2rem;
@@ -585,6 +483,8 @@ p {
   gap: 1rem;
   justify-content: space-between;
   flex-wrap: nowrap;
+  align-items: flex-start;
+  margin-bottom: 3rem;
 }
 
 .project-card-container {
