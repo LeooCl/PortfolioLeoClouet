@@ -392,7 +392,7 @@ export default {
   left: 0;
   width: 100%;
   height: 100%;
-  background: #a5dfc8;
+  background: #205b43;
   z-index: 0;
   overflow: hidden;
 }

@@ -1,54 +1,78 @@
 <template>
-  <div v-if="project" class="project-detail">
-    <h1 class="project-title">{{ project.title }}</h1>
+  <section v-if="project" class="project-detail-page">
+    <div class="project-detail-bg"></div>
 
-    <div class="project-image-container">
-      <img :src="project.image" :alt="project.title" class="project-image" />
-    </div>
+    <div class="project-detail">
+      <div class="project-hero">
+        <span class="section-badge">Projet</span>
+        <h1 class="project-title">{{ project.title }}</h1>
+        <p class="project-intro">
+          Découvrez les détails du projet, les technologies utilisées, les
+          compétences mobilisées ainsi que le contexte et les choix réalisés
+          pendant son développement.
+        </p>
+      </div>
 
-    <div class="project-info">
-      <!-- Technologies + Compétences -->
-      <div class="project-tech-skills">
-        <div class="project-technologies">
-          <h3>Technologies utilisées :</h3>
-          <ul>
-            <li v-for="tech in project.technologies" :key="tech">
-              {{ tech }}
-            </li>
-          </ul>
-        </div>
-
-        <div class="project-skills">
-          <h3>Compétences mises en avant :</h3>
-          <ul>
-            <li v-for="skill in project.skills" :key="skill">
-              {{ skill }}
-            </li>
-          </ul>
+      <div class="project-image-card">
+        <div class="project-image-container">
+          <img :src="project.image" :alt="project.title" class="project-image" />
         </div>
       </div>
 
-      <!-- Contexte -->
-      <div class="project-context">
-        <h3>Contexte :</h3>
-        <p>{{ project.context }}</p>
+      <div class="project-info">
+        <div class="project-tech-skills">
+          <div class="info-card">
+            <h3>Technologies utilisées</h3>
+            <div class="tags-list">
+              <span
+                v-for="tech in project.technologies"
+                :key="tech"
+                class="tag"
+              >
+                {{ tech }}
+              </span>
+            </div>
+          </div>
+
+          <div class="info-card">
+            <h3>Compétences mises en avant</h3>
+            <div class="tags-list">
+              <span
+                v-for="skill in project.skills"
+                :key="skill"
+                class="tag secondary"
+              >
+                {{ skill }}
+              </span>
+            </div>
+          </div>
+        </div>
+
+        <div class="content-grid">
+          <div class="content-card">
+            <h3>Contexte</h3>
+            <p>{{ project.context }}</p>
+          </div>
+
+          <div class="content-card">
+            <h3>Réalisation</h3>
+            <p>{{ project.realization }}</p>
+          </div>
+        </div>
       </div>
 
-      <!-- Réalisation -->
-      <div class="project-realization">
-        <h3>Réalisation :</h3>
-        <p>{{ project.realization }}</p>
+      <div class="project-links">
+        <AppButton :to="project.githubLink" label="Voir sur GitHub" />
       </div>
     </div>
-    <div class="project-links">
-      <!-- Lien GitHub -->
-      <AppButton :to="project.githubLink" label="Voir sur GitHub" />
-    </div>
-  </div>
+  </section>
 
-  <div v-else class="not-found">
-    <p>Projet non trouvé.</p>
-  </div>
+  <section v-else class="not-found-page">
+    <div class="not-found-card">
+      <h2>Projet non trouvé</h2>
+      <p>Le projet que vous recherchez n’existe pas ou n’est plus disponible.</p>
+    </div>
+  </section>
 </template>
 
 <script>
@@ -71,23 +95,71 @@ export default {
 </script>
 
 <style scoped>
+.project-detail-page {
+  position: relative;
+  overflow: hidden;
+  min-height: 100vh;
+  padding: 100px 20px 80px;
+  background: linear-gradient(180deg, #f8fbfa 0%, #eef6f2 100%);
+}
+
+.project-detail-bg {
+  position: absolute;
+  inset: 0;
+  background:
+    radial-gradient(circle at top left, rgba(32, 91, 67, 0.12), transparent 30%),
+    radial-gradient(circle at bottom right, rgba(0, 129, 167, 0.1), transparent 30%);
+  pointer-events: none;
+}
+
 .project-detail {
+  position: relative;
+  z-index: 1;
   max-width: 1200px;
   margin: 0 auto;
-  padding: 2rem;
-  padding-top: 70px;
-  display: flex;
-  flex-direction: column;
-  gap: 2rem;
-  align-items: flex-start;
+}
+
+.project-hero {
+  text-align: center;
+  max-width: 850px;
+  margin: 0 auto 50px;
+}
+
+.section-badge {
+  display: inline-block;
+  margin-bottom: 18px;
+  padding: 8px 14px;
+  border-radius: 999px;
+  background: rgba(32, 91, 67, 0.1);
+  color: #205b43;
+  font-size: 0.95rem;
+  font-weight: 600;
+  letter-spacing: 0.3px;
 }
 
 .project-title {
-  font-size: 5em;
+  margin: 0 0 18px;
+  font-size: clamp(3rem, 6vw, 5.5rem);
+  line-height: 0.95;
   font-family: "Formula Condensed", sans-serif;
-  text-align: center;
   color: #205b43;
-  margin-bottom: 1rem;
+}
+
+.project-intro {
+  margin: 0 auto;
+  max-width: 760px;
+  font-size: 1.12rem;
+  line-height: 1.8;
+  color: #5f6d78;
+}
+
+.project-image-card {
+  padding: 16px;
+  border-radius: 32px;
+  background: rgba(255, 255, 255, 0.7);
+  box-shadow: 0 20px 60px rgba(25, 50, 40, 0.08);
+  border: 1px solid rgba(32, 91, 67, 0.08);
+  margin-bottom: 36px;
 }
 
 .project-image-container {
@@ -95,111 +167,156 @@ export default {
   width: 100%;
   aspect-ratio: 16 / 9;
   overflow: hidden;
-  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  border-radius: 24px;
 }
 
 .project-image {
-  position: absolute;
-  top: 0;
-  left: 0;
   width: 100%;
   height: 100%;
   object-fit: cover;
+  display: block;
 }
 
+/* blocs principaux */
 .project-info {
-  padding: 1rem 0;
   display: flex;
   flex-direction: column;
-  gap: 1.5rem;
+  gap: 28px;
 }
 
-/* Bloc technologies + compétences */
 .project-tech-skills {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 24px;
+}
+
+.info-card,
+.content-card {
+  padding: 28px;
+  border-radius: 24px;
+  background: rgba(255, 255, 255, 0.84);
+  border: 1px solid rgba(32, 91, 67, 0.08);
+  box-shadow: 0 12px 32px rgba(25, 50, 40, 0.06);
+}
+
+.info-card h3,
+.content-card h3 {
+  margin: 0 0 18px;
+  font-size: 2rem;
+  font-family: "Formula Condensed", sans-serif;
+  color: #205b43;
+}
+
+.tags-list {
   display: flex;
-  gap: 3rem;
-  justify-content: space-between;
-  align-items: flex-start;
+  flex-wrap: wrap;
+  gap: 12px;
 }
 
-.project-technologies,
-.project-skills {
-  flex: 1;
-  margin-bottom: 1rem;
+.tag {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding: 10px 16px;
+  border-radius: 999px;
+  background: rgba(32, 91, 67, 0.1);
+  color: #205b43;
+  font-size: 0.95rem;
+  font-weight: 600;
 }
 
-.project-technologies h3,
-.project-skills h3,
-.project-context h3,
-.project-realization h3 {
-  font-size: 1.4rem;
-  margin-bottom: 0.5rem;
-  color: #222;
+.tag.secondary {
+  background: rgba(0, 129, 167, 0.1);
+  color: #006b88;
 }
 
-.project-technologies ul,
-.project-skills ul {
-  list-style-type: disc;
-  margin-left: 20px;
-  color: #555;
-  padding-left: 0.5rem;
+.content-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 24px;
 }
 
-.project-technologies ul li,
-.project-skills ul li,
-.project-context p,
-.project-realization p {
-  font-size: 1.1rem;
-  color: #666;
-  margin-bottom: 0.4rem;
-}
-
-.project-context,
-.project-realization {
-  margin-bottom: 1rem;
+.content-card p {
+  margin: 0;
+  font-size: 1.05rem;
+  line-height: 1.9;
+  color: #61707b;
 }
 
 .project-links {
+  margin-top: 36px;
   width: 100%;
   display: flex;
   justify-content: center;
 }
 
-.github-btn {
-  background-color: #333;
-  color: white;
-  padding: 0.8rem 1.5rem;
-  border-radius: 4px;
-  text-decoration: none;
-  font-size: 1rem;
-  transition: background-color 0.3s;
+/* not found */
+.not-found-page {
+  min-height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 40px 20px;
+  background: linear-gradient(180deg, #f8fbfa 0%, #eef6f2 100%);
 }
 
-.github-btn:hover {
-  background-color: #444;
-}
-
-.not-found {
+.not-found-card {
+  max-width: 500px;
+  padding: 36px;
   text-align: center;
-  font-size: 1.5rem;
-  color: #888;
-  margin-top: 3rem;
+  border-radius: 24px;
+  background: #ffffff;
+  border: 1px solid rgba(32, 91, 67, 0.08);
+  box-shadow: 0 12px 32px rgba(25, 50, 40, 0.06);
 }
 
-/* Responsive */
+.not-found-card h2 {
+  margin: 0 0 12px;
+  font-size: 2.5rem;
+  font-family: "Formula Condensed", sans-serif;
+  color: #205b43;
+}
+
+.not-found-card p {
+  margin: 0;
+  color: #667580;
+  line-height: 1.7;
+}
+
+/* responsive */
+@media (max-width: 992px) {
+  .project-tech-skills,
+  .content-grid {
+    grid-template-columns: 1fr;
+  }
+}
+
 @media (max-width: 768px) {
-  .project-title {
-    font-size: 3rem;
+  .project-detail-page {
+    padding: 90px 16px 60px;
   }
 
-  .project-tech-skills {
-    flex-direction: column;
-    gap: 1.5rem;
+  .project-image-card {
+    padding: 10px;
+    border-radius: 22px;
   }
 
-  .project-detail {
-    padding: 1.2rem;
-    padding-top: 70px;
+  .project-image-container {
+    border-radius: 18px;
+  }
+
+  .info-card,
+  .content-card {
+    padding: 22px;
+  }
+
+  .info-card h3,
+  .content-card h3 {
+    font-size: 1.7rem;
+  }
+
+  .project-intro {
+    font-size: 1.02rem;
   }
 }
 </style>
